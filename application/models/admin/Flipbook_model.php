@@ -110,6 +110,10 @@ class Flipbook_model extends CI_Model{
 		$this->db->insert('pages', $data);
 	}
 
+	function delete_embed_page($id) {
+		$this->db->where('id', $id);
+		$this->db->delete('pages');
+	}
 }
 
 ?>

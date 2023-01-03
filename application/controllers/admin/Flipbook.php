@@ -380,6 +380,18 @@ class Flipbook extends MY_Controller
 		$this->load->view('admin/flipbook/view', $data);
 	} 
 
+	public function page_embed_delete() {
+		$id = $this->input->get("id");
+		$flipbook_id = $this->input->get("flipbook");
+		// print_r(["id" => $id, "flipbook_id" => $flipbook_id]);
+		// echo "<pre>";
+		// return;
+		$this->flipbook->delete_embed_page($id);
+		$data['flipbook'] = $this->flipbook->get_flipbook_detail($flipbook_id);		
+		$this->load->view('admin/flipbook/view', $data);
+
+	}
+
 	private function upload_files($path, $title, $files) {
         $config = array(
             'upload_path'   => $path,

@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="<?= base_url('assets/flipbook/css/flipbook.style.css'); ?>"> 
 <link rel="stylesheet" href="<?= base_url('assets/flipbook/css/font-awesome.css'); ?>"> 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 
   <div class="container-fluid">
@@ -88,11 +90,11 @@
     <?php foreach($flipbook["pages"] as $page) { ?>
       pages[<?php echo $page["page"] ?>-1] = {
         <?php if($page["content_type"]=="note") { ?>
-          htmlContent: '<div border border-dark" style="height: 300px; width: 250px; background-color: #feff87; border-radius: 10px;"><p><?php echo $page["content"]?></p></div>' 
+          htmlContent: '<div class="draggable" style="background-color:white; display:flex; flex-direction: column;"><div border border-dark" style="height: 300px; width: 250px; background-color: #feff87; border-radius: 10px;"><p><?php echo $page["content"]?></p></div><a class="btn btn-danger" href="<?php echo base_url('admin/flipbook/page_embed_delete?id=' . $page['id'] . '&flipbook=' . $flipbook['id']) ?>">Delete</a></div>' 
         <?php } ?>    
 
         <?php if($page["content_type"]=="media") { ?>
-          htmlContent: '<iframe  width="640" height="360" src="<?php echo $page["content"] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>' 
+          htmlContent: '<div class="draggable" style="background-color:white; display:flex; flex-direction: column;"><iframe  width="640" height="360" src="<?php echo $page["content"] ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><a class="btn btn-danger" href="<?php echo base_url('admin/flipbook/page_embed_delete?id=' . $page['id'] . '&flipbook=' . $flipbook['id']) ?>">Delete</a></div>' 
         <?php } ?>    
       }
     <?php } ?>
@@ -166,3 +168,10 @@
         $("#page").val(deeplink[1])
       }
     </script>
+
+<script>
+  $(document).ready(function() {
+    $(".draggable" ).draggable();
+  })
+
+  </script>
